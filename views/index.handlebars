@@ -1,0 +1,17 @@
+<div class='row'>
+    <!-- undevoured burgers -->
+    <div class='col s12 m6 l6'>
+        <h2>Available Burgers</h2>
+        <ul class='collection'>
+            {{#each burgers}}
+                {{#unless devoured}}
+                    <li class='collection-item'>{{burger_name}}</li>
+                {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
+    <!-- devoured burgers -->
+    <div class='col s12 m6 l6'>
+        <h2>Burgers You Missed</h2>
+    </div>
+</div>
