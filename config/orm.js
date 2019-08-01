@@ -20,24 +20,20 @@ const orm = {
      * insertOne method inserts ONE new record into the table, creating an insert statement based on the column and value pairs provided as arguments.
      * 
      * @param {string} table 
-     * @param {obejct} pairs 
+     * @param {array} cols
+     * @param {array} vals 
      * @param {function} callback 
      */
-    insertOne: function(table, pairs, callback) {
-        let sql1 = `INSERT into ${table} (`;
-        let sql2 = ' VALUES (';
-        for (let key in pairs) {
-            sql1 += `${key}, `;
-            let value = pairs[key];
-            value = this.quoteString(value);
-            sql2 += `${value}, `;
-        }
-        // remove the final comma and space, add a terminating parenthesis
-        sql1 = sql1.substring(0,sql1.length - 2) + ')';
-        sql2 = sql2.substring(0,sql2.length - 2) + ')';
-        let sql = sql1 + sql2 + ';';
+    insertOne: function(table, cols, vals, callback) {
+        let sql = `INSERT INTO ${table}`;
+        sql += " (";
+        sql += cols.toString();
+        sql += ") ";
+        sql += "VALUES (";
+        sql += this.fillQuestionMarks(vals.length);
+        sql += ") ";
         console.log(sql);
-        connection.query(sql, (error, data) => {
+        connection.query(sql, vals, (error, data) => {
             if (error) throw error;
             callback(data);
         });
@@ -51,15 +47,9 @@ const orm = {
      * @param {function} callback 
      */
     updateOne: function(table, pairs, id, callback) {
-        let sql = `UPDATE ${table} SET `;
-        for (let key in pairs) {
-            let value = pairs[key];
-            value = this.quoteString(value);
-            sql += `${key} = ${value}, `;
-        }
-        // remove the final comma and space
-        id = this.quoteString(id);
-        sql = sql.substring(0,sql.length - 2);
+        let sql = `UPDATE ${table}`;
+        sql += ' SET ';
+        sql += this.objectToSQL(pairs);
         sql += ` WHERE id = ${id}`;
         console.log(sql);
         connection.query(sql, (error, data) => {
@@ -74,9 +64,27 @@ const orm = {
      */
     quoteString: function(value) {
         if (typeof value === "string" && value.indexOf(" ") >= 0) {
-            value = "'" + value + "'";
+            value = "`" + value + "`";
         }
         return value;
+    },
+    fillQuestionMarks: function(num) {
+        let array = [];
+        for (let i = 0; i < num; i++) {
+          array.push("?");
+        }
+        return array.toString();
+    },
+    objectToSQL: function (obj) {
+        var array = [];
+        for (var key in obj) {
+            var value = obj[key];
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+              value = "'" + value + "'";
+            }
+            array.push(key + "=" + value);
+        }
+        return array.toString();
     }
 }
 

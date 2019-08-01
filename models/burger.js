@@ -16,8 +16,8 @@ const burger = {
      * @param {object} pairs 
      * @param {function} callback 
      */
-    create: function(pairs, callback) {
-        orm.insertOne('burgers', pairs, (results) =>{
+    create: function(cols, vals, callback) {
+        orm.insertOne('burgers', cols, vals, (results) =>{
             callback(results);
         });
     },

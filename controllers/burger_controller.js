@@ -17,9 +17,9 @@ router.get('/api/burgers', (request, response) => {
 
 // route path: POST /api/add
 router.post('/api/add', (request, response) => {
-    burger.create({
-        burger_name: request.body.burger_name
-        }, 
+    burger.create(
+        ['burger_name'],
+        [request.body.burger_name], 
         (data) => {
             // status - 201 - created
             response.status(201).end();

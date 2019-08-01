@@ -60,12 +60,14 @@ $(document).ready( function() {
 
     function addBurger(event) {
         event.preventDefault();
-        let newBurger = {
-            burger_name: $('#burger-name').val().trim()
+        if ($('#burger-name').val().trim().length > 0) {
+            let newBurger = {
+                burger_name: $('#burger-name').val().trim()
+            }
+            console.log(newBurger);
+            $.post('/api/add', newBurger, loadBurgers);
+            $('#burger-name').val('');
         }
-        console.log(newBurger);
-        $.post('/api/add', newBurger, loadBurgers);
-        $('#burger-name').val('');
     }
 
 });
