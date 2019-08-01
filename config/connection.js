@@ -1,7 +1,7 @@
 require('dotenv').config(); // guard private login data
 const mysql = require('mysql');
 
-const connection = () => {
+var connection = () => {
     if (process.env.JAWSDB_URL) {
         mysql.createConnection(process.env.JAWSDB_URL);
     } else {
