@@ -24,15 +24,17 @@ const orm = {
      * @param {function} callback 
      */
     insertOne: function(table, pairs, callback) {
-        let sql1 = `INSERT into ${table} VALUES (`;
-        let sql2 = 'VALUES (';
+        let sql1 = `INSERT into ${table} (`;
+        let sql2 = ' VALUES (';
         for (let key in pairs) {
             sql1 += `${key}, `;
-            sql2 += `'${pairs[key]}', `;
+            let value = pairs[key];
+            value = this.quoteString(value);
+            sql2 += `${value}, `;
         }
         // remove the final comma and space, add a terminating parenthesis
-        sql1 = substring(0,sql1.length - 2) + ')';
-        sql2 = substring(0,sql2.length - 2) + ')';
+        sql1 = sql1.substring(0,sql1.length - 2) + ')';
+        sql2 = sql2.substring(0,sql2.length - 2) + ')';
         let sql = sql1 + sql2 + ';';
         console.log(sql);
         connection.query(sql, (error, data) => {
@@ -51,16 +53,30 @@ const orm = {
     updateOne: function(table, pairs, id, callback) {
         let sql = `UPDATE ${table} SET `;
         for (let key in pairs) {
-            sql += `${key} = '${pairs[key]}', `;
+            let value = pairs[key];
+            value = this.quoteString(value);
+            sql += `${key} = ${value}, `;
         }
         // remove the final comma and space
-        sql = substring(0,sql1.length - 2);
-        sql += ` WHERE id = '${id}'`;
+        id = this.quoteString(id);
+        sql = sql.substring(0,sql.length - 2);
+        sql += ` WHERE id = ${id}`;
         console.log(sql);
         connection.query(sql, (error, data) => {
             if (error) throw error;
             callback(data);
         })
+    },
+    /**
+     * Puts quotations around value if it is a string with spaces
+     * 
+     * @param {string} value 
+     */
+    quoteString: function(value) {
+        if (typeof value === "string" && value.indexOf(" ") >= 0) {
+            value = "'" + value + "'";
+        }
+        return value;
     }
 }
 
