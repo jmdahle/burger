@@ -13,7 +13,9 @@ const burger = {
     },
     /**
      * sends the table name and new record definition (key/value pairs) to the orm connection to the database; status returned to the callback function
-     * @param {object} pairs 
+     * 
+     * @param {array} cols 
+     * @param {array} vals
      * @param {function} callback 
      */
     create: function(cols, vals, callback) {

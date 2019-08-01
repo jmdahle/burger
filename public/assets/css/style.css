@@ -1,0 +1,23 @@
+* {
+    font-family: 'Staatliches', cursive;
+}
+
+#logo {
+    width: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#title {
+    font-size: 48pt;
+    display: inline;
+    vertical-align: top;
+}
+
+a, a.secondary-content {
+    color: #1976d2;
+}
+
+a:hover, a.secondary-content:hover {
+    text-decoration: underline;
+}

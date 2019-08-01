@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // guard private login data
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({

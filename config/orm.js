@@ -10,7 +10,7 @@ const orm = {
      */
     selectAll: function(table, callback) {
         let sql = `SELECT * from ${table};`;
-        console.log(sql);
+        // console.log(sql);
         connection.query(sql, (error, data) => {
             if (error) throw error;
             callback(data);
@@ -32,7 +32,7 @@ const orm = {
         sql += "VALUES (";
         sql += this.fillQuestionMarks(vals.length);
         sql += ") ";
-        console.log(sql);
+        // console.log(sql);
         connection.query(sql, vals, (error, data) => {
             if (error) throw error;
             callback(data);
@@ -51,7 +51,7 @@ const orm = {
         sql += ' SET ';
         sql += this.objectToSQL(pairs);
         sql += ` WHERE id = ${id}`;
-        console.log(sql);
+        // console.log(sql);
         connection.query(sql, (error, data) => {
             if (error) throw error;
             callback(data);

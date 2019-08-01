@@ -5,10 +5,11 @@ const router = express.Router();
 
 // route path: GET /
 router.get('/', (request, response) => {
-        response.render('index');
+    response.render('index');
 });
 
 // route path: GET /api/burgers
+// passes burger data
 router.get('/api/burgers', (request, response) => {
     burger.all( (data) => {
         response.json(data);
@@ -16,6 +17,7 @@ router.get('/api/burgers', (request, response) => {
 });
 
 // route path: POST /api/add
+// sends new burger data to model
 router.post('/api/add', (request, response) => {
     burger.create(
         ['burger_name'],
@@ -28,8 +30,8 @@ router.post('/api/add', (request, response) => {
 });
 
 // route path: PUT /api/devour
+// sends update burger to model
 router.put('/api/devour', (request,response) => {
-    console.log(request.body);
     burger.udpate({
         devoured: true
         }, 
