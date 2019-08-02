@@ -1,6 +1,6 @@
 $(document).ready( function() {
     // respond to document events
-    $(document).on('click', '.devourit', devourBurger);
+    $(document).on('click', 'a.devourit', devourBurger);
     $(document).on('submit', '#new-burger-form', addBurger);
 
     // initial page population
@@ -50,15 +50,15 @@ $(document).ready( function() {
             `<li class='collection-item'>`,
             burger.burger_name.trim(),
             //`<button class='devourit btn-small secondary-content'>Devour</button>`,
-            `<a class='devourit secondary-content'>DEVOUR</a>`,
+            `<a href='#' class='devourit secondary-content'>DEVOUR</a>`,
             `</li>`
             ].join('')
         );
         // add the id to the button as data
-        newBurgerItem.find('.devourit').data('id',burger.id);
+        newBurgerItem.find('a.devourit').data('id',burger.id);
         if (burger.devoured) {
             // hide the button for devoured burgers
-            newBurgerItem.find('.devourit').css('display','none');
+            newBurgerItem.find('a.devourit').css('display','none');
         }
         return newBurgerItem;
     }
