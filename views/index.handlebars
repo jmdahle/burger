@@ -5,39 +5,17 @@
             <div class='card-content'>
                 <h4>Menu of Available Burgers</h4>
                 <p>
-                    Below are the burgers currently available. Click the 'DEVOUR' button to order and eat the burger. If
-                    you don't see the burger you want on the menu, request it by <a href='#make'>making</a> a new
-                    burger.
+                    Below are the burgers currently available. Click the 'DEVOUR' button to order and eat the burger. If you don't see the burger you want on the menu, request it by <a href='#make'>making</a> a new burger.
                 </p>
                 <ul id='burger-menu' class='collection'>
                     <!-- available burgers go here -->
                 </ul>
             </div>
         </div>
-    </div>
-    <!-- devoured burgers -->
-    <div class='col s12 m12 l6'>
-        <div class='card blue lighten-5'>
-            <div class='card-content'>
-                <h4>Burgers You Missed</h4>
-                <p>
-                    Below are previous menu items that our patrons have already gobbled up! See the <a
-                        href='#menu'>menu</a> of available burgers to make a selection for your own enjoyment.
-                </p>
-                <ul id='burgers-eaten' class='collection'>
-                    <!-- devoured burgers go here -->
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class='row'>
-    <div class='col s12 m12 l9'><a id='make'></a>
-    <hr>
-        <h4>Make a Burger!</h4>
+        <hr>
+        <h4>Make Your Own Burger!</h4>
         <p>
-            We want to make sure our menu is full of yummy burger options. Not seeing what you want on our <a
-                href='#menu'>menu</a>? Make your own burger below.
+            We want to make sure our menu is full of yummy burger options.  Not seeing what you want on our <a href='#menu'>menu</a>? Make your own burger below.
         </p>
         <!-- form for adding a new burger -->
         <form id='new-burger-form'>
@@ -47,6 +25,21 @@
                 <button class='btn-small blue darken-2' type='submit' name='action'>Submit</button>
             </div>
         </form>
+
+    </div>
+    <!-- devoured burgers -->
+    <div class='col s12 m12 l6'>
+        <div class='card blue lighten-5'>
+            <div class='card-content'>
+                <h4>Burgers You Missed</h4>
+                <p>
+                    Below are previous menu items that our patrons have already gobbled up! See the <a href='#menu'>menu</a> of available burgers to make a selection for your own enjoyment.
+                </p>
+                <ul id='burgers-eaten' class='collection'>
+                    <!-- devoured burgers go here -->
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <!-- include js client -->

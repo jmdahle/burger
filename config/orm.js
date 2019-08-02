@@ -10,7 +10,7 @@ const orm = {
      */
     selectAll: function(table, callback) {
         let sql = `SELECT * from ${table};`;
-        console.log(sql);
+        // console.log(sql);
         connection.query(sql, (error, data) => {
             if (error) throw error;
             callback(data);
